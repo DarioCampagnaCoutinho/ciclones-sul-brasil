@@ -61,6 +61,26 @@ pnpm preview
 - `pnpm lint`: Executa o ESLint para verificar o código
 - `pnpm preview`: Serve a versão de produção localmente
 
+## Implantação
+
+Este projeto está implantado na AWS Amplify para facilitar o acesso e a distribuição. Você pode acessar a versão ao vivo através do link fornecido pelo Amplify após a implantação.
+
+### Configuração do Build (amplify.yml)
+
+O arquivo `amplify.yml` na raiz do projeto configura o processo de build no AWS Amplify. Ele instrui o Amplify a usar o pnpm (em vez do npm padrão) para gerenciar dependências e builds, garantindo consistência com o ambiente de desenvolvimento local.
+
+Principais configurações:
+- **preBuild**: Habilita o corepack, prepara o pnpm e instala as dependências com `pnpm install`.
+- **build**: Executa o comando `pnpm run build` para compilar a aplicação.
+- **artifacts**: Define o diretório `dist` como base para os arquivos de produção.
+- **cache**: Cacheia o `node_modules` para acelerar builds subsequentes.
+
+Para implantar sua própria versão no AWS Amplify:
+
+1. Faça o build da aplicação localmente: `pnpm build`
+2. Conecte o repositório ao AWS Amplify Console
+3. O Amplify detectará automaticamente o `amplify.yml` e usará as configurações definidas
+
 ## Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
